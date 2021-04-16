@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', indexRouter);
-
+// configuracion graphql
 app.use('/graphql', graphqlHTTP({
   schema: schema,
   rootValue: root,
