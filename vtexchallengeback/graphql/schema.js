@@ -74,9 +74,9 @@ const schema = buildSchema(`
   }
 
   type Query {
-    getMovie(id: Int!): Movie
+    getMovie(movieId: Int!): Movie
     getMovies(page: Int!): [Movie]
-    getMovieCredits(id: Int!): [Credit]
+    getMovieCredits(movieId: Int!): [Credit]
   }
 `);
 

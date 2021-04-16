@@ -1,18 +1,30 @@
 const fetch = require('node-fetch');
+const Credit = require('../models/credit');
+const Movie = require('../models/movie');
 
 const getMovie = async ({ movieId }) => {
-    await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.API_KEY}&language=en-US`)
+    var movie = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.API_KEY}&language=en-US`)
     .then(res => res.json());
+    return movie;
 }
 
 const getMovies = async ({ page }) => {
-    await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.API_KEY}&language=en-US&page=${page}`)
-    .then(res => res.json());
+    var movies = await fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.API_KEY}&language=en-US&page=${page}`)
+    .then(res => res.json())
+    .then(data => {
+        if(data.success && !data.success) {
+            return [];
+        }
+        return data.results.map(movie => new Movie(movie)); 
+    });
+    return movies;
 }
 
 const getMovieCredits = async ({ movieId }) => {
-    await fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${process.env.API_KEY}&language=en-US`)
-    .then(res => res.json());
+    res = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${process.env.API_KEY}&language=en-US`)
+    .then(res => res.json())
+    .then(data => data.cast.map(cast => new Credit(cast)));
+    return res;
 }
 
 const root = {

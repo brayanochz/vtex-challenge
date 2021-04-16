@@ -4,8 +4,8 @@ var logger = require('morgan');
 var { graphqlHTTP } = require('express-graphql');
 
 var indexRouter = require('./routes/index');
-const { schema } = require('./graphql/schema');
-const { root } = require('./graphql/root');
+const schema = require('./graphql/schema');
+const root = require('./graphql/root');
 
 var app = express();
 
