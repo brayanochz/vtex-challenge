@@ -39,11 +39,15 @@ function useApi() {
                             title,
                             release_date,
                             poster_path,
-                            vote_average
+                            vote_average,
+                            genres {
+                                id,
+                                name,
+                            },
                         }
                     }
                 `,
-                variables: { movieId: movieId },
+                variables: { movieId: parseInt(movieId) },
             }),
             headers: {
                 'Content-Type': 'application/json',
@@ -51,7 +55,7 @@ function useApi() {
             }
         })
         .then(res => res.json())
-        .then(data => Movie(data.data.getMovie) );
+        .then(data => new Movie(data.data.getMovie) );
     }
 
     const getCredits = async (movieId) => {
@@ -62,10 +66,13 @@ function useApi() {
                     query GetCredits($movieId: Int!) {
                         getMovieCredits(movieId: $movieId) {
                             id,
+                            name,
+                            original_name,
+                            profile_path,
                         }
                     }
                 `,
-                variables: { movieId },
+                variables: { movieId: parseInt(movieId) },
             }),
             headers: {
                 'Content-Type': 'application/json',
@@ -73,6 +80,10 @@ function useApi() {
             }
         })
         .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            return data.data.getMovieCredits
+        });
     }
 
     return {

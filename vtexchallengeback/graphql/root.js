@@ -39,7 +39,10 @@ const getMovies = async ({ page }) => {
 const getMovieCredits = async ({ movieId }) => {
     res = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${process.env.API_KEY}&language=en-US`)
     .then(res => res.json())
-    .then(data => data.cast.map(cast => new Credit(cast)));
+    .then(data => {
+        console.log(data);
+        return data.cast.map(cast => new Credit(cast))
+    });
     return res;
 }
 
