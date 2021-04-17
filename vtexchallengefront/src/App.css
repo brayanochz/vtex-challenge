@@ -27,15 +27,30 @@
 .App-link {
   color: #61dafb;
 }
+.superContainer {
+  height: 90vh;
+  overflow: scroll;
+}
 
 .listContainer {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .listItem {
-  padding: 1em;
+  width: 20%;
+}
+
+.itemTitle {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.floatLabel{
+  position: absolute;
+  background-color: aliceblue;
 }
 
 @keyframes App-logo-spin {

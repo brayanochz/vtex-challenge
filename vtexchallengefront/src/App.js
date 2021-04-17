@@ -11,12 +11,10 @@ function App() {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </header>
-        <div>
-          <Switch>
-            <Route path="/" exact={true} component={ListView}></Route>
-            <Route path="/detail/:id" exact={true} component={DetailView}></Route>
-          </Switch>
-        </div>
+        <Switch>
+          <Route path="/" exact={true} component={ListView}></Route>
+          <Route path="/detail/:id" exact={true} component={DetailView}></Route>
+        </Switch>
       </div>
     </Router>
   );
